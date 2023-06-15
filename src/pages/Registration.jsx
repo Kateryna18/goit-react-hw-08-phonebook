@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registrationUser } from 'redux/operations';
+import { registrationUser } from 'redux/auth/operations';
+
 
 export default function Registration() {
 const [name, setName] = useState('');

@@ -12,15 +12,18 @@ import Registration from "pages/Registration";
 import LoginPage from "pages/LoginPage";
 import Contacts from "pages/Contacts";
 import NotFound from "pages/NotFound";
+import SharedLayout from "./SharedLayout/SharedLayout";
 
 export function App() {
   
   return (
       <Routes>
-        <Route path="/" element={<Registration/>} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/contacts" element={<Contacts/>} />
-        <Route path="*" element={<NotFound/>} />
+        <Route path="/" element={<SharedLayout/>}>
+         <Route path="/register" element={<Registration/>} />
+         <Route path="/login" element={<LoginPage/>} />
+         <Route path="/contacts" element={<Contacts/>} />
+         <Route path="*" element={<NotFound/>} />
+         </Route>
       </Routes>
   );
 }
