@@ -1,11 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-// import { useEffect } from 'react';
 // import { ContactForm } from './ContactForm/ContactForm';
 // import { ContactsList } from './ContactsList/ContactsList';
 // import { Filter } from './Filter/Filter';
 // import { Error } from './Error/Error'
 // import { Toaster } from 'react-hot-toast';
-// import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
 // import { fetchContacts } from '../redux/operations';
 // import { BallTriangle } from 'react-loader-spinner';
 import Registration from "pages/Registration";
@@ -13,8 +12,16 @@ import LoginPage from "pages/LoginPage";
 import Contacts from "pages/Contacts";
 import NotFound from "pages/NotFound";
 import SharedLayout from "./SharedLayout/SharedLayout";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { refreshCurrentUser } from "redux/auth/operations";
 
 export function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshCurrentUser())
+  }, [dispatch])
   
   return (
       <Routes>

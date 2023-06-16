@@ -11,7 +11,7 @@ export function ContactItem({contactObj}) {
     <li  className={css.contactsItem}>
                     <div>
                     <span className={css.contactsItemName}>{contactObj.name}</span>:
-                    <span className={css.contactsItemNumber}> {contactObj.phone}</span>
+                    <span className={css.contactsItemNumber}> {contactObj.number}</span>
                     </div>
                     <button className={css.contactsItemButton} onClick={() => dispatch(deleteContact(contactObj.id))}>Delete</button>
                 </li>
