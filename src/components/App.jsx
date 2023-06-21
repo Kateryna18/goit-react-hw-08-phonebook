@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 // import { ContactForm } from './ContactForm/ContactForm';
 // import { ContactsList } from './ContactsList/ContactsList';
 // import { Filter } from './Filter/Filter';
@@ -7,39 +7,56 @@ import { Routes, Route } from "react-router-dom";
 // import { useSelector } from 'react-redux';
 // import { fetchContacts } from '../redux/operations';
 // import { BallTriangle } from 'react-loader-spinner';
-import Registration from "pages/Registration";
-import LoginPage from "pages/LoginPage";
-import Contacts from "pages/Contacts";
-import NotFound from "pages/NotFound";
-import SharedLayout from "./SharedLayout/SharedLayout";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { refreshCurrentUser } from "redux/auth/operations";
+import Registration from 'pages/Registration';
+import LoginPage from 'pages/LoginPage';
+import Contacts from 'pages/Contacts';
+import NotFound from 'pages/NotFound';
+import SharedLayout from './SharedLayout/SharedLayout';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshCurrentUser } from 'redux/auth/operations';
+import { RestrictedRoute } from './RestrictedRoute/RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 
 export function App() {
   const dispatch = useDispatch();
+  const { isRefreshing } = useSelector(state => state.auth);
 
   useEffect(() => {
-    dispatch(refreshCurrentUser())
-  }, [dispatch])
-  
-  return (
-      <Routes>
-        <Route path="/" element={<SharedLayout/>}>
-         <Route path="/register" element={<Registration/>} />
-         <Route path="/login" element={<LoginPage/>} />
-         <Route path="/contacts" element={<Contacts/>} />
-         <Route path="*" element={<NotFound/>} />
-         </Route>
-      </Routes>
+    dispatch(refreshCurrentUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              component={<Registration />}
+              redirectTo="/contacts"
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute component={<Contacts />} redirectTo="/login" />
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
-
-
-
-
-
-
 
 // export function App() {
 //   const { items, isLoading, error } = useSelector(state => state.contacts);

@@ -3,16 +3,16 @@ import { ContactsList } from 'components/ContactsList/ContactsList'
 import { Filter } from 'components/Filter/Filter';
 import { Toaster } from 'react-hot-toast';
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/operations';
 
 export default function Contacts() {
+  const {items} = useSelector(state => state.contacts.contacts)
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContacts())
   }, [dispatch])
-
 
   return (
     <div>
@@ -20,7 +20,7 @@ export default function Contacts() {
       <ContactForm/>
       <h2>Contacts</h2>
       <Filter/>
-      <ContactsList/>
+      {items.length > 0 && <ContactsList/>}
       <Toaster />
     </div>
   )

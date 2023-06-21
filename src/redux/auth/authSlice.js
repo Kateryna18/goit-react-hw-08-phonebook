@@ -14,9 +14,18 @@ const handleFulfilledLogOut = (state) => {
     state.isLoggedIn = false;
 }
 
+const handlePendingRefresh = (state) => {
+    state.isRefreshing = true;
+}
+
 const handleFulfilledRefresh = (state, action) => {
     state.user = action.payload;
     state.isLoggedIn = true;
+    state.isRefreshing = false;
+}
+
+const handleRejectedRefresh = (state) => {
+    state.isRefreshing = false;
 }
 
 
@@ -28,7 +37,9 @@ const authSlice = createSlice({
         .addCase(registrationUser.fulfilled, handleFulfilledAuth)
         .addCase(logInUser.fulfilled, handleFulfilledAuth)
         .addCase(logOut.fulfilled, handleFulfilledLogOut)
+        .addCase(refreshCurrentUser.pending, handlePendingRefresh)
         .addCase(refreshCurrentUser.fulfilled, handleFulfilledRefresh)
+        .addCase(refreshCurrentUser.rejected, handleRejectedRefresh)
     }
 })
 

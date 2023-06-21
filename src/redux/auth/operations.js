@@ -16,7 +16,6 @@ async (user, thunkAPI) => {
     try {
         const { data } = await axios.post("/users/signup", user);
         setToken(data.token)
-        console.log(data)
         return data;
     }catch(error) {
         thunkAPI.rejectWithValue(error.message);
@@ -28,7 +27,6 @@ async (authData, thunkAPI) => {
     try {
         const { data } = await axios.post("/users/login", authData);
         setToken(data.token)
-        console.log(data)
         return data
     }catch(error) {
         return thunkAPI.rejectWithValue(error.message)
@@ -48,15 +46,15 @@ async (_, thunkAPI) => {
 
 export const refreshCurrentUser = createAsyncThunk("auth/refresh",
 async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
+    const { token } = thunkAPI.getState().auth;
 
-    if(persistedToken === null) {
+    if(!token) {
         console.log('token no')
-        return thunkAPI.rejectWithValue();
+        return thunkAPI.rejectWithValue("no valid token");
     }
 
-    setToken(persistedToken)
+    console.log("refreshing")
+    setToken(token)
 
     try {
         const { data } = await axios.get("/users/current");

@@ -10,7 +10,7 @@ export function ContactForm() {
   const [number, setPhone] = useState('');
 
   const dispatch = useDispatch();
-  const { items } = useSelector(state => state.contacts);
+  const { items } = useSelector(state => state.contacts.contacts);
 
   const contactData = { name, number };
 
