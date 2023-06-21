@@ -1,0 +1,23 @@
+.header {
+    padding: 5px;
+    display: flex;
+    /* gap: 10px; */
+    justify-content: space-between
+}
+
+.main {
+    padding-top: 100px;
+    min-height: 500px;
+}
+
+.footerBox {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.text {
+    text-align: center;
+    font-size: 12px;
+}

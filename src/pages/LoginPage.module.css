@@ -1,0 +1,27 @@
+.form {
+    width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.input {
+    margin-left: 5px;
+}
+
+.formButton {
+    padding: 7px;
+    border-radius: 5px;
+    color: #9dc180;
+    border: none;
+}
+
+.formButton:hover, .formButton:focus {
+    cursor: pointer;
+    background-color: #d6f6bc;
+    color: #516641;
+}

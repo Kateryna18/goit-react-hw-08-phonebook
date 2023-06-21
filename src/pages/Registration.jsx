@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registrationUser } from 'redux/auth/operations';
+import css from './Registration.module.css';
 
 
 export default function Registration() {
@@ -47,23 +48,23 @@ const formReset = () => {
 }
 
   return (
-    <div>
-      <h2>Please, enter your data</h2>
-      <form onSubmit={handleSubmit}>
+    <>
+      <h2 className={css.title}>Please, enter your data</h2>
+      <form className={css.form} onSubmit={handleSubmit}>
         <label>
         Name
-          <input type="name" onChange={handleChange} name="name" value={name}/>
+          <input className={css.input} type="name" onChange={handleChange} name="name" value={name}/>
         </label>
         <label>
         Email
-          <input type="email" onChange={handleChange} name="email" value={email}/>
+          <input className={css.input} type="email" onChange={handleChange} name="email" value={email}/>
         </label>
         <label>
         Password
-          <input type="password" onChange={handleChange} name="password" value={password}/>
+          <input className={css.input} type="password" onChange={handleChange} name="password" value={password}/>
         </label>
-        <button>Registration</button>
+        <button className={css.formButton}>Registration</button>
       </form>
-    </div>
+    </>
   );
 }
