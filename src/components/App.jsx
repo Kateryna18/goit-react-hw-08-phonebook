@@ -10,6 +10,7 @@ import { refreshCurrentUser } from 'redux/auth/operations';
 import { RestrictedRoute } from './RestrictedRoute/RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { Toaster } from 'react-hot-toast';
+import HomePage from 'pages/HomePage';
 
 export function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export function App() {
   ) : (<>
   <Routes>
       <Route path="/" element={<SharedLayout />}>
+      <Route index element={<HomePage />} />
         <Route
           path="/register"
           element={

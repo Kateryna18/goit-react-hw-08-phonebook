@@ -9,11 +9,11 @@
     flex-grow: 1;
 }
 
-#main-content:empty::before {
+/* #main-content:empty::before {
     content: "";
     height: 0;
     visibility: hidden;
-  }
+  } */
 
 .footer {
     margin-top: auto;
