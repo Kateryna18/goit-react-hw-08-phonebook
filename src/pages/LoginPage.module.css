@@ -10,7 +10,8 @@
 }
 
 .input {
-    margin-left: 5px;
+    display: block;
+    margin-top: 3px;
 }
 
 .formButton {

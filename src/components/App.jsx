@@ -1,12 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-// import { ContactForm } from './ContactForm/ContactForm';
-// import { ContactsList } from './ContactsList/ContactsList';
-// import { Filter } from './Filter/Filter';
-// import { Error } from './Error/Error'
-// import { Toaster } from 'react-hot-toast';
-// import { useSelector } from 'react-redux';
-// import { fetchContacts } from '../redux/operations';
-// import { BallTriangle } from 'react-loader-spinner';
 import Registration from 'pages/Registration';
 import LoginPage from 'pages/LoginPage';
 import Contacts from 'pages/Contacts';
@@ -17,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { refreshCurrentUser } from 'redux/auth/operations';
 import { RestrictedRoute } from './RestrictedRoute/RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
+import { Toaster } from 'react-hot-toast';
 
 export function App() {
   const dispatch = useDispatch();
@@ -28,8 +21,8 @@ export function App() {
 
   return isRefreshing ? (
     <b>Refreshing user...</b>
-  ) : (
-    <Routes>
+  ) : (<>
+  <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route
           path="/register"
@@ -55,6 +48,9 @@ export function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
+    <Toaster />
+    </>
+    
   );
 }
 

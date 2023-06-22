@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logInUser } from 'redux/auth/operations';
+import toast from 'react-hot-toast';
 import css from './LoginPage.module.css';
 
 export default function LoginPage() {
@@ -9,6 +10,11 @@ export default function LoginPage() {
 
 
   const dispatch = useDispatch();
+
+  const authData = {
+    email,
+    password,
+  }
 
   const handleChange = (event) => {
     switch(event.target.name) {
@@ -22,13 +28,16 @@ export default function LoginPage() {
             return;
     }
 }
+const validFields = authData.email && authData.password
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const authData = {
-      email,
-      password,
+
+    if(!validFields) {
+      toast.error("All fields of the form must be filled");
+      return
     }
+    
     dispatch(logInUser(authData))
     setPassword('');
   }

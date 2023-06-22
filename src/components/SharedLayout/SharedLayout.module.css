@@ -6,8 +6,17 @@
 }
 
 .main {
-    padding-top: 100px;
-    min-height: 500px;
+    flex-grow: 1;
+}
+
+#main-content:empty::before {
+    content: "";
+    height: 0;
+    visibility: hidden;
+  }
+
+.footer {
+    margin-top: auto;
 }
 
 .footerBox {

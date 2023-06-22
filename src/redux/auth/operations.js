@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = "https://connections-api.herokuapp.com";
 
@@ -7,7 +8,7 @@ const setToken = token => {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 
-export const deleteToken = () => {
+const deleteToken = () => {
     axios.defaults.headers.common.Authorization = '';
 }
 
@@ -18,7 +19,9 @@ async (user, thunkAPI) => {
         setToken(data.token)
         return data;
     }catch(error) {
-        thunkAPI.rejectWithValue(error.message);
+        toast.error("No valid email or password");
+        return thunkAPI.rejectWithValue(error.message)
+        
     }
 })
 
@@ -29,6 +32,7 @@ async (authData, thunkAPI) => {
         setToken(data.token)
         return data
     }catch(error) {
+        toast.error("No valid email or password");
         return thunkAPI.rejectWithValue(error.message)
     }
 })
@@ -49,11 +53,9 @@ async (_, thunkAPI) => {
     const { token } = thunkAPI.getState().auth;
 
     if(!token) {
-        console.log('token no')
         return thunkAPI.rejectWithValue("no valid token");
     }
-
-    console.log("refreshing")
+    
     setToken(token)
 
     try {

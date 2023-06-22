@@ -9,15 +9,13 @@ import css from './SharedLayout.module.css';
 export default function SharedLayout() {
   const { isLoggedIn } = useSelector(state => state.auth);
 
-  console.log(isLoggedIn);
-
   return (
     <>
       <header className={css.header}>
         {isLoggedIn && <Navigation />}
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </header>
-      <main className={css.main}>
+      <main className={css.main} id="main-content">
         <Outlet />
       </main>
       <footer className={css.footer}>

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
 import { logInUser, logOut, refreshCurrentUser, registrationUser } from './operations';
 
+
 const handleFulfilledAuth = (state, {payload}) => {
     state.user = payload.user;
     state.token = payload.token;
@@ -18,8 +19,8 @@ const handlePendingRefresh = (state) => {
     state.isRefreshing = true;
 }
 
-const handleFulfilledRefresh = (state, action) => {
-    state.user = action.payload;
+const handleFulfilledRefresh = (state, {payload}) => {
+    state.user = payload;
     state.isLoggedIn = true;
     state.isRefreshing = false;
 }

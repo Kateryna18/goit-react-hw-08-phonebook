@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registrationUser } from 'redux/auth/operations';
 import css from './Registration.module.css';
+import toast from 'react-hot-toast';
 
 
 export default function Registration() {
@@ -16,8 +17,6 @@ const user = {
     email,
     password,
 }
-
-console.log(user);
 
 const handleChange = (event) => {
     switch(event.target.name) {
@@ -35,8 +34,14 @@ const handleChange = (event) => {
     }
 }
 
+const validFields = user.name && user.email && user.password
+
 const handleSubmit = (event) => {
     event.preventDefault();
+    if(!validFields) {
+      toast.error("All fields of the form must be filled");
+      return
+    }
     dispatch(registrationUser(user));
     formReset();
 }
